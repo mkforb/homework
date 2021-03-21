@@ -105,8 +105,8 @@ public class DecisionMaking {
 
             case 6:
                 // Задание 6
-				int x1 = 1, x2 = 100;
-				int x;
+                int x1 = 1, x2 = 100;
+                int x;
                 System.out.println("Загадайте число от 1 до 100");
                 while (x1 <= x2) {
                     x = x1 + ( x2 - x1 ) / 2;
