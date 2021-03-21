@@ -13,15 +13,15 @@ public class DecisionMaking {
                 // Задание 1
                 byte count = 75;
                 if (count <= 100 && count >= 90) {
-                    System.out.println("отлично");
+                    System.out.println("Отлично");
                 } else if (count <= 89 && count >= 60) {
-                    System.out.println("хорошо");
+                    System.out.println("Хорошо");
                 } else if (count <= 59 && count >= 40) {
-                    System.out.println("удовлетворительно");
+                    System.out.println("Удовлетворительно");
                 } else if (count <= 39 && count >= 0) {
-                    System.out.println("попробуйте в следующий раз");
+                    System.out.println("Попробуйте в следующий раз");
                 } else {
-                    System.out.println("введены некорректные данные");
+                    System.out.println("Введены некорректные данные");
                 }
                 break;
 
@@ -57,7 +57,7 @@ public class DecisionMaking {
                 int plates = in.nextInt();
                 System.out.println("Введите кол-во моющего средства");
                 double detergent = in.nextDouble();
-                while (plates > 0 && detergent >= 0.5) {
+                while (plates >= 1 && detergent >= 0.5) {
                     System.out.println("Осталось " + plates + " тарелок и " + detergent + " моющего средства");
                     plates -= 1;
                     detergent -= 0.5;
@@ -74,8 +74,8 @@ public class DecisionMaking {
             case 4:
                 // Задание 4
                 byte numProg = 8;
-                System.out.println("Введите число от 1 до 9");
                 while (true) {
+                    System.out.println("Введите число от 1 до 9");
                     byte numUser = in.nextByte();
                     if (numUser < 0 || numUser > 9) {
                         System.out.println("Введено некорректное число");
@@ -83,10 +83,11 @@ public class DecisionMaking {
                         System.out.println("загаданное число больше");
                     } else if (numProg < numUser) {
                         System.out.println("загаданное число меньше");
-                    } else if (numUser == numProg) {
+                    } else if (numProg == numUser) {
                         System.out.println("Вы угадали");
                         break;
                     } else if (numUser == 0) {
+                        System.out.println("Выход из программы");
                         break;
                     }
                 }
@@ -94,7 +95,7 @@ public class DecisionMaking {
 
             case 5:
                 // Задание 5
-                int random = 10 + (int) ( Math.random() * 490 );
+                int random = 10 + (int) ( Math.random() * 491 );
                 if (random > 25 && random < 200) {
                     System.out.println("Число " + random + " содержится в интервале (25;200)");
                 } else {
@@ -131,7 +132,6 @@ public class DecisionMaking {
                         break;
                     }
                     System.out.println(x1 + " " + x2);
-					//if (x == x1 && x == x2) break;
                 }
                 break;
 
