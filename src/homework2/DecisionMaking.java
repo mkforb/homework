@@ -79,15 +79,15 @@ public class DecisionMaking {
                     byte numUser = in.nextByte();
                     if (numUser < 0 || numUser > 9) {
                         System.out.println("Введено некорректное число");
+                    } else if (numUser == 0) {
+                        System.out.println("Выход из программы");
+                        break;
                     } else if (numProg > numUser) {
                         System.out.println("загаданное число больше");
                     } else if (numProg < numUser) {
                         System.out.println("загаданное число меньше");
                     } else if (numProg == numUser) {
                         System.out.println("Вы угадали");
-                        break;
-                    } else if (numUser == 0) {
-                        System.out.println("Выход из программы");
                         break;
                     }
                 }
