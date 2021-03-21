@@ -131,7 +131,6 @@ public class DecisionMaking {
                         System.out.println("Дан некорректный ответ");
                         break;
                     }
-                    System.out.println(x1 + " " + x2);
                 }
                 break;
 
