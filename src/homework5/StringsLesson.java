@@ -41,10 +41,25 @@ public class StringsLesson {
         // Задание 2
         // Найти количество вхождений одной строки в другую.
         // Например, строка "дом" встречается в строке "дом домик домой одомашненный" 4 раза
+        int occurCount = 0;
         System.out.println("Введите строку, в которой будем искать");
         String strFull = sc.nextLine();
         System.out.println("Введите строку, которую будем искать");
         String strFind = sc.nextLine();
-        
+        if (strFull.length() == 0 || strFind.length() == 0 || strFind.length() > strFull.length()) {
+            System.out.println("Ошибка");
+        } else {
+            if (strFull.startsWith(strFind)) {
+                //occurCount++;
+                //strFull = strFull.substring(strFind.length() - 1);
+            }
+            if (strFull.endsWith(strFind)) {
+                //occurCount++;
+                //strFull = strFull.substring(0, );
+            }
+            String[] arrStr = strFull.split(strFind);
+            System.out.println(Arrays.toString(arrStr));
+            System.out.println(arrStr.length - 1);
+        }
     }
 }
