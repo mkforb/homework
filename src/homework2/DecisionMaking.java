@@ -44,7 +44,9 @@ public class DecisionMaking {
                         System.out.println(a1 + " * " + a2 + " = " + (a1 * a2));
                         break;
                     case 9:
-                        System.out.println(a1 + " / " + a2 + " = " + ((double) a1 / a2));
+                        // Проверить деление на 0
+                        if (a2 == 0) System.out.println("На 0 делить нельзя.");
+                        else System.out.println(a1 + " / " + a2 + " = " + ((double) a1 / a2));
                         break;
                     default:
                         System.out.println("Введен некорректный оператор");
