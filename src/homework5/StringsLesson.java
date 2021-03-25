@@ -21,10 +21,10 @@ public class StringsLesson {
         int index = 0;
         while (index < words.length) {
             System.out.println("Введите слово");
-            String word = sc.nextLine();
+            String word = sc.nextLine().trim();
             if (word.equals("exit")) {
                 break;
-            } else {
+            } else if (word.length() > 0) {
                 String[] wordsSort = words.clone();
                 Arrays.sort(wordsSort);
                 if (Arrays.binarySearch(wordsSort, word) < 0) {
@@ -47,15 +47,13 @@ public class StringsLesson {
         String find = "";
         while (str.equals("")) {
             System.out.println("Введите строку, в которой будем искать");
-            str = sc.nextLine();
+            str = sc.nextLine().trim();
         }
         while (find.equals("")) {
             System.out.println("Введите строку, которую будем искать");
-            find = sc.nextLine();
+            find = sc.nextLine().trim();
         }
-        if (str.length() == 0 || find.length() == 0 || find.length() > str.length()) {
-            System.out.println("Ошибка");
-        } else {
+        if (find.length() <= str.length()) {
             while (str.startsWith(find)) {
                 occurCount++;
                 str = str.substring(find.length());
@@ -66,8 +64,8 @@ public class StringsLesson {
             }
             String[] arrStr = str.split(find);
             occurCount += arrStr.length - 1;
-            System.out.println(occurCount);
         }
+        System.out.println(occurCount);
 
         // Задание 3
         // Написать функцию, которая проверяет, является ли строка палиндромом.
@@ -78,8 +76,9 @@ public class StringsLesson {
         str = "";
         while (str.equals("")) {
             System.out.println("Введите строку для проверки на палиндром");
-            str = sc.nextLine();
+            str = sc.nextLine().trim();
         }
+        str = str.replaceAll(" ", "");
         int mod = str.length() % 2;
         String str1 = str.substring(0, str.length() / 2);
         String str2 = str.substring(str.length() / 2 + mod);
@@ -105,7 +104,7 @@ public class StringsLesson {
         str = "";
         while (str.equals("")) {
             System.out.println("Введите строку для преобразования");
-            str = sc.nextLine();
+            str = sc.nextLine().trim();
         }
         str = str.toLowerCase();
         String newStr = str.substring(0, 1).toUpperCase() + str.substring(1);
@@ -114,5 +113,32 @@ public class StringsLesson {
         // Задание 5
         // Вводится с клавиатуры массив слов. Определить, сколько слов начинается на определенную букву.
 
+        occurCount = 0;
+        System.out.println("Введите массив слов через пробел");
+        str = "";
+        while (str.equals("")) {
+            str = sc.nextLine().trim();
+        }
+        str = str.toUpperCase();
+        words = str.split(" ");
+        System.out.println("На какую букву будем искать слова?");
+        str = "";
+        while (str.equals("")) {
+            // ToDo: String или char?
+            str = sc.nextLine();
+            if (str.length() > 1) {
+                System.out.println("Введите одну букву");
+                str = "";
+            }
+            // ToDo: Проверить что введена буква, а не символ. По коду unicode?
+        }
+        chars1 = str.toUpperCase().toCharArray();
+        for (String word : words) {
+            if (word.length() > 0) {
+                chars2 = word.toCharArray();
+                if (chars1[0] == chars2[0]) occurCount++;
+            }
+        }
+        System.out.println(occurCount);
     }
 }
