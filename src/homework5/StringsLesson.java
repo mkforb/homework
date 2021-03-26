@@ -78,12 +78,15 @@ public class StringsLesson {
             System.out.println("Введите строку для проверки на палиндром");
             str = sc.nextLine().trim();
         }
-        str = str.replaceAll(" ", "");
+        str = str.replaceAll(" ", "").toLowerCase();
+        // Поделить строку пополам
         int mod = str.length() % 2;
         String str1 = str.substring(0, str.length() / 2);
         String str2 = str.substring(str.length() / 2 + mod);
-        char[] chars1 = str1.toLowerCase().toCharArray();
-        char[] chars2 = str2.toLowerCase().toCharArray();
+        // Преобразовать две строки в массивы
+        char[] chars1 = str1.toCharArray();
+        char[] chars2 = str2.toCharArray();
+        // Сравнить массивы
         boolean isPalindrom = true;
         for (int i = 0; i < chars1.length; i++) {
             if (chars1[i] != chars2[chars2.length - i - 1]) {
