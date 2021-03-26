@@ -17,22 +17,19 @@ public class StringsLesson {
         System.out.println("Укажите кол-во слов");
         int len = Integer.parseInt(sc.nextLine());
         String[] words = new String[len];
-        Arrays.fill(words, "");
         int index = 0;
         while (index < words.length) {
             System.out.println("Введите слово");
             String word = sc.nextLine().trim();
-            if (word.equals("exit")) {
-                break;
-            } else if (word.length() > 0) {
-                String[] wordsSort = words.clone();
-                Arrays.sort(wordsSort);
-                if (Arrays.binarySearch(wordsSort, word) < 0) {
-                    // Добавить слово
-                    words[index] = word;
+            if (word.equals("exit")) break;
+            for (int i = 0; i < words.length; i++) {
+                if (words[i] == null) {
+                    words[i] = word;
                     index++;
-                } else {
+                    break;
+                } else if (words[i].equals(word)) {
                     System.out.println("Слово \"" + word + "\" уже есть");
+                    break;
                 }
             }
         }
@@ -78,7 +75,10 @@ public class StringsLesson {
             System.out.println("Введите строку для проверки на палиндром");
             str = sc.nextLine().trim();
         }
-        str = str.replaceAll(" ", "").toLowerCase();
+        str = str.replaceAll(" ", "");
+        String strRev = (new StringBuilder(str)).reverse().toString();
+
+        /*str = str.replaceAll(" ", "").toLowerCase();
         // Поделить строку пополам
         int mod = str.length() % 2;
         String str1 = str.substring(0, str.length() / 2);
@@ -93,8 +93,8 @@ public class StringsLesson {
                 isPalindrom = false;
                 break;
             }
-        }
-        if (isPalindrom) {
+        }*/
+        if (str.equalsIgnoreCase(strRev)) {
             System.out.println("Строка является палиндромом");
         } else {
             System.out.println("Строка не является палиндромом");
@@ -135,10 +135,10 @@ public class StringsLesson {
             }
             // ToDo: Проверить что введена буква, а не символ. По коду unicode?
         }
-        chars1 = str.toUpperCase().toCharArray();
+        char[] chars1 = str.toUpperCase().toCharArray();
         for (String word : words) {
             if (word.length() > 0) {
-                chars2 = word.toCharArray();
+                char[] chars2 = word.toCharArray();
                 if (chars1[0] == chars2[0]) occurCount++;
             }
         }
