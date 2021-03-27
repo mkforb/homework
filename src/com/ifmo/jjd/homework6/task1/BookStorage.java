@@ -16,6 +16,8 @@ public class BookStorage {
         for (int i = 0; i < books.length; i++) {
             if (books[i] == null) {
                 books[i] = book;
+            } else if (books[i].getTitle().equals(book.getTitle())) {
+                throw new IllegalArgumentException("Книга с названием \"" + book.getTitle() + "\" уже есть в хранилище");
             }
         }
         System.out.println("В хранилище нет места");
