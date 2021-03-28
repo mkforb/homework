@@ -1,5 +1,6 @@
 package com.ifmo.jjd.homework6.task2;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Cat {
@@ -18,6 +19,7 @@ public class Cat {
     }
 
     public void catchMouse(Mouse mouse) {
+        Objects.requireNonNull(mouse, "mouse не может быть null");
         if (speed <= mouse.getSpeed()) {
             System.out.println("Кот не смог поймать эту мышь");
             return;
@@ -31,12 +33,19 @@ public class Cat {
         System.out.println("Кот больше не может ловить мышей");
     }
 
+    private void loseMouse(int index) {
+        if (index < 0 || index > mice.length - 1) {
+            throw new IllegalArgumentException("Нет такой мыши");
+        }
+        mice[index] = null;
+    }
+
     public void attackCat(Cat cat) {
         if (weight > cat.getWeight()) {
             for (int i = 0; i < cat.getMice().length; i++) {
                 if (speed > cat.getMice()[i].getSpeed()) {
                     catchMouse(cat.getMice()[i]);
-                    // cat.getMice()[i] == null; // ToDo: нет доступа, нужен метод
+                    cat.loseMouse(i);
                 }
             }
         } else {
@@ -88,5 +97,16 @@ public class Cat {
 
     public Mouse[] getMice() {
         return mice;
+    }
+
+    @Override
+    public String toString() {
+        return "Cat{" +
+                "name='" + name + '\'' +
+                ", color='" + color + '\'' +
+                ", speed=" + speed +
+                ", weight=" + weight +
+                ", mice=" + Arrays.toString(mice) +
+                '}';
     }
 }

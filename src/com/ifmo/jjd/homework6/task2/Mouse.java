@@ -17,4 +17,11 @@ public class Mouse {
         }
         this.speed = speed;
     }
+
+    @Override
+    public String toString() {
+        return "Mouse{" +
+                "speed=" + speed +
+                '}';
+    }
 }

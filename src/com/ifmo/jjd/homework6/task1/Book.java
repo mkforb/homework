@@ -10,6 +10,9 @@ public class Book {
     private int publishYear;
 
     public Book(String title, int authorsCount, int pageCount, int publishYear) {
+        if (authorsCount < 1) {
+            throw new IllegalArgumentException("authorsCount < 1");
+        }
         setTitle(title);
         authors = new Author[authorsCount];
         setPageCount(pageCount);
