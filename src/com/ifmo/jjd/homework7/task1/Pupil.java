@@ -32,6 +32,6 @@ public class Pupil extends Person implements StudyAble {
 
     @Override
     public void study() {
-
+        knowledgeLevel += 1;
     }
 }

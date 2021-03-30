@@ -21,6 +21,6 @@ public class Teacher extends Person implements TeachAble {
 
     @Override
     public void teach(StudyAble studyAble) {
-
+        studyAble.study();
     }
 }
