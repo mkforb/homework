@@ -12,9 +12,7 @@ public class Mouse {
     }
 
     public void setSpeed(int speed) {
-        if (speed < 0) {
-            throw new IllegalArgumentException("speed < 0");
-        }
+        if (speed < 0) throw new IllegalArgumentException("speed < 0");
         this.speed = speed;
     }
 

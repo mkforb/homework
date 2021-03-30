@@ -1,5 +1,7 @@
 package com.ifmo.jjd.homework6.task1;
 
+import java.util.Objects;
+
 public class Author {
     private String firstname;
     private String lastname;
@@ -13,10 +15,9 @@ public class Author {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
-        if (firstname == null || firstname.trim().length() < 2) {
-            throw new IllegalArgumentException("firstname < 2");
-        }
+    private void setFirstname(String firstname) {
+        Objects.requireNonNull(firstname, "firstname не может быть null");
+        if (firstname.trim().length() < 2) throw new IllegalArgumentException("firstname < 2");
         this.firstname = firstname;
     }
 
@@ -24,10 +25,9 @@ public class Author {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
-        if (lastname == null || lastname.trim().length() < 2) {
-            throw new IllegalArgumentException("lastname < 2");
-        }
+    private void setLastname(String lastname) {
+        Objects.requireNonNull(lastname, "lastname не может быть null");
+        if (lastname.trim().length() < 2) throw new IllegalArgumentException("lastname < 2");
         this.lastname = lastname;
     }
 

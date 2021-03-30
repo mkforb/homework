@@ -10,9 +10,8 @@ public class Cat {
     private int weight;
     private Mouse[] mice;
 
-    public Cat(String name, String color, int speed, int weight) {
+    public Cat(String name, int speed, int weight) {
         setName(name);
-        setColor(color);
         setSpeed(speed);
         setWeight(weight);
         mice = new Mouse[100];
@@ -41,15 +40,18 @@ public class Cat {
     }
 
     public void attackCat(Cat cat) {
-        if (weight > cat.getWeight()) {
-            for (int i = 0; i < cat.getMice().length; i++) {
+        if (this == cat) throw new IllegalArgumentException("Кот не может атаковать сам себя");
+        if (weight <= cat.getWeight()) {
+            System.out.println("Кот " + cat.getName() + " сильнее");
+            return;
+        }
+        for (int i = 0; i < cat.getMice().length; i++) {
+            if (cat.getMice()[i] != null) {
                 if (speed > cat.getMice()[i].getSpeed()) {
                     catchMouse(cat.getMice()[i]);
                     cat.loseMouse(i);
                 }
             }
-        } else {
-            System.out.println("Этот кот сильнее");
         }
     }
 

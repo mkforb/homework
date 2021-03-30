@@ -9,30 +9,26 @@ public class Book {
     private int pageCount;
     private int publishYear;
 
-    public Book(String title, int authorsCount, int pageCount, int publishYear) {
-        if (authorsCount < 1) {
-            throw new IllegalArgumentException("authorsCount < 1");
-        }
+    public Book(String title, int authorsCount) {
         setTitle(title);
         authors = new Author[authorsCount];
-        setPageCount(pageCount);
-        setPublishYear(publishYear);
     }
 
-    public void addAuthor(Author author) {
+    public boolean addAuthor(Author author) {
         Objects.requireNonNull(author, "author не может быть null");
         for (int i = 0; i < authors.length; i++) {
             if (authors[i] == null) {
                 authors[i] = author;
-                return;
+                return true;
             }
         }
         System.out.println("Авторы уже все известны");
+        return false;
     }
 
     public void addAuthor(Author... authors) {
         for (Author author : authors) {
-            addAuthor(author);
+            if (!addAuthor(author)) return;
         }
     }
 

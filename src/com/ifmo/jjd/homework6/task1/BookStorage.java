@@ -19,7 +19,8 @@ public class BookStorage {
                 books[i] = book;
                 return;
             } else if (books[i].getTitle().equals(book.getTitle())) {
-                throw new IllegalArgumentException("Книга с названием \"" + book.getTitle() + "\" уже есть в хранилище");
+                System.out.println("Книга с названием \"" + book.getTitle() + "\" уже есть в хранилище");
+                return;
             }
         }
         System.out.println("В хранилище нет места");
@@ -30,9 +31,7 @@ public class BookStorage {
     }
 
     public void setNumber(int number) {
-        if (number < 1) {
-            throw new IllegalArgumentException("number < 1");
-        }
+        if (number < 1) throw new IllegalArgumentException("number < 1");
         this.number = number;
     }
 
