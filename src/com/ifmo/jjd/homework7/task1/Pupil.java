@@ -34,4 +34,12 @@ public class Pupil extends Person implements StudyAble {
     public void study() {
         knowledgeLevel += 1;
     }
+
+    @Override
+    public String toString() {
+        return "Pupil{" +
+                "subjectStudied='" + subjectStudied + '\'' +
+                ", knowledgeLevel=" + knowledgeLevel +
+                '}';
+    }
 }

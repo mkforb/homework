@@ -23,4 +23,11 @@ public class Teacher extends Person implements TeachAble {
     public void teach(StudyAble studyAble) {
         studyAble.study();
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "taughtSubject='" + taughtSubject + '\'' +
+                '}';
+    }
 }

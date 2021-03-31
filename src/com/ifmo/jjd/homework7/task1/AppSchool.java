@@ -6,6 +6,11 @@ public class AppSchool {
         School school = new School("Школа", principal, 1, 1);
         school.addTeacher(new Teacher("Вера Петровна", 28, "Математика"));
         school.addPupil(new Pupil("Вася", 8, "Математика", 1));
+
         school.schoolDay();
+        System.out.println(school);
+
+        school.schoolDay();
+        System.out.println(school);
     }
 }

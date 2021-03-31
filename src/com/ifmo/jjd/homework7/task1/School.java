@@ -1,5 +1,6 @@
 package com.ifmo.jjd.homework7.task1;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class School {
@@ -12,8 +13,8 @@ public class School {
         Objects.requireNonNull(title, "Название не может быть null");
         Objects.requireNonNull(principal, "Директор не может быть null");
         if (title.length() < 3) throw new IllegalArgumentException("title < 3");
-        if (teachersCount < 1) throw new IllegalArgumentException("Школа не может без учителей");
-        if (pupilsCount < 1) throw new IllegalArgumentException("Школа не может без учеников");
+        if (teachersCount < 1) throw new IllegalArgumentException("Школа не может быть без учителей");
+        if (pupilsCount < 1) throw new IllegalArgumentException("Школа не может быть без учеников");
         this.title = title;
         this.principal = principal;
         teachers = new Teacher[teachersCount];
@@ -28,24 +29,28 @@ public class School {
         return principal;
     }
 
-    public void addTeacher(Teacher teacher) {
+    public boolean addTeacher(Teacher teacher) {
         Objects.requireNonNull(teacher, "Учитель не может быть null");
         for (int i = 0; i < teachers.length; i++) {
             if (teachers[i] == null) {
                 teachers[i] = teacher;
-                return;
+                return true;
             }
         }
+        System.out.println("Все учителя уже добавлены");
+        return false;
     }
 
-    public void addPupil(Pupil pupil) {
+    public boolean addPupil(Pupil pupil) {
         Objects.requireNonNull(pupil, "Ученик не может быть null");
         for (int i = 0; i < pupils.length; i++) {
             if (pupils[i] == null) {
                 pupils[i] = pupil;
-                return;
+                return true;
             }
         }
+        System.out.println("Все ученики уже добавлены");
+        return false;
     }
 
     public void schoolDay() {
@@ -61,5 +66,15 @@ public class School {
             }
         }
         principal.announceClassStop();
+    }
+
+    @Override
+    public String toString() {
+        return "School{" +
+                "title='" + title + '\'' +
+                ", principal=" + principal +
+                ", teachers=" + Arrays.toString(teachers) +
+                ", pupils=" + Arrays.toString(pupils) +
+                '}';
     }
 }
