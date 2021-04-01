@@ -12,4 +12,9 @@ public class Principal extends Person {
     public void announceClassStop() {
         System.out.println(getFullname() + " объявил конец занятий");
     }
+
+    @Override
+    public String toString() {
+        return "Principal{}";
+    }
 }

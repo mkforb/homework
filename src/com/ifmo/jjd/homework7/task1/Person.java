@@ -12,4 +12,12 @@ public class Person {
     public String getFullname() {
         return fullname;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "fullname='" + fullname + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }

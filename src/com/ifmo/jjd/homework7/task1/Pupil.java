@@ -32,7 +32,8 @@ public class Pupil extends Person implements StudyAble {
 
     @Override
     public void study() {
-        knowledgeLevel += 1;
+        knowledgeLevel++;
+        System.out.println("Знания " + getFullname() + " по " + subjectStudied + " повышены до " + knowledgeLevel);
     }
 
     @Override

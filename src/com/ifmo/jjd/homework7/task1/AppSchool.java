@@ -7,6 +7,8 @@ public class AppSchool {
         school.addTeacher(new Teacher("Вера Петровна", 28, "Математика"));
         school.addPupil(new Pupil("Вася", 8, "Математика", 1));
 
+        System.out.println(school);
+
         school.schoolDay();
         System.out.println(school);
 
