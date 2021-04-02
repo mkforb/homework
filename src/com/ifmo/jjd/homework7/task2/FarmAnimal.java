@@ -1,59 +1,76 @@
 package com.ifmo.jjd.homework7.task2;
 
-import com.ifmo.jjd.homework7.task2.util.Randoms;
+import com.ifmo.jjd.homework7.task2.util.Rand;
 
 public class FarmAnimal extends Animal {
     private final String type;
     private int health;
     private final int maxHealth;
-    private boolean edible;
-    private int resource;
+    private final boolean edible;
+    private final int resource;
     private boolean onFarm;
 
-    public FarmAnimal() {
+    private FarmAnimal(int weight, int speed, String type, int health, boolean edible, int resource, boolean onFarm) {
+        super(weight, speed);
+        this.type = type;
+        this.health = health;
+        this.maxHealth = health;
+        this.edible = edible;
+        this.resource = resource;
+        this.onFarm = onFarm;
+    }
+
+    public static FarmAnimal get() {
+        FarmAnimal animal = null;
         String[] types = {"cow", "cat", "chicken", "rabbit"};
-        type = types[Randoms.getRandomInt(types.length)];
+        String type = types[Rand.getInt(types.length)];
         switch (type) {
             case "cow":
-                setWeight(Randoms.getRandomInt(200, 300));
-                setSpeed(Randoms.getRandomInt(5, 15));
-                health = Randoms.getRandomInt(100, 200);
-                edible = true;
-                resource = Randoms.getRandomInt(10, 20);
+                animal = new FarmAnimal(Rand.getInt(200, 300),
+                        Rand.getInt(5, 15),
+                        type,
+                        Rand.getInt(100, 200),
+                        true,
+                        Rand.getInt(10, 20),
+                        true);
                 break;
             case "cat":
-                setWeight(Randoms.getRandomInt(5, 10));
-                setSpeed(Randoms.getRandomInt(15, 25));
-                health = Randoms.getRandomInt(10, 20);
-                edible = false;
-                resource = 0;
+                animal = new FarmAnimal(Rand.getInt(5, 10),
+                        Rand.getInt(15, 25),
+                        type,
+                        Rand.getInt(10, 20),
+                        false,
+                        0,
+                        true);
                 break;
             case "chicken":
-                setWeight(Randoms.getRandomInt(3, 5));
-                setSpeed(Randoms.getRandomInt(2, 6));
-                health = Randoms.getRandomInt(10, 20);
-                edible = true;
-                resource = Randoms.getRandomInt(5, 10);
+                animal = new FarmAnimal(Rand.getInt(3, 5),
+                        Rand.getInt(2, 6),
+                        type,
+                        Rand.getInt(10, 20),
+                        true,
+                        Rand.getInt(5, 10),
+                        true);
                 break;
             case "rabbit":
-                setWeight(Randoms.getRandomInt(3, 5));
-                setSpeed(Randoms.getRandomInt(20, 30));
-                health = Randoms.getRandomInt(20, 40);
-                edible = true;
-                resource = 0;
+                animal = new FarmAnimal(Rand.getInt(3, 5),
+                        Rand.getInt(20, 30),
+                        type,
+                        Rand.getInt(20, 40),
+                        true,
+                        0,
+                        true);
                 break;
         }
-        maxHealth = health;
-        onFarm = true;
+        return animal;
     }
 
     public boolean isEdible() {
-        return edible;
+        return onFarm && edible;
     }
 
     public int getResource() {
-        if (!onFarm) return 0;
-        return resource;
+        return onFarm ? resource : 0;
     }
 
     public boolean isOnFarm() {
@@ -65,8 +82,7 @@ public class FarmAnimal extends Animal {
     }
 
     private void addHealth() {
-        if (!onFarm) return;
-        if (health == maxHealth) return;
+        if (!onFarm || health == maxHealth) return;
         health++;
     }
 
@@ -77,7 +93,6 @@ public class FarmAnimal extends Animal {
         } else {
             health = 0;
             onFarm = false;
-            edible = false;
         }
     }
 

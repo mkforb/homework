@@ -7,7 +7,7 @@ public class AppFarm {
         for (int i = 0; i < 730; i++) {
             System.out.println("День " + (i+1));
             if (!farm.passDay()) {
-                System.out.println("Потрачено");
+                System.out.println("Ресурсы закончились");
                 break;
             }
         }

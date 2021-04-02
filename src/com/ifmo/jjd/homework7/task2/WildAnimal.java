@@ -1,32 +1,44 @@
 package com.ifmo.jjd.homework7.task2;
 
-import com.ifmo.jjd.homework7.task2.util.Randoms;
+import com.ifmo.jjd.homework7.task2.util.Rand;
 
 public class WildAnimal extends Animal {
-    private String name;
-    private int strength;
+    private final String name;
+    private final int strength;
     private int chasingCount;
 
-    public WildAnimal() {
+    private WildAnimal(int weight, int speed, String name, int strength) {
+        super(weight, speed);
+        this.name = name;
+        this.strength = strength;
+        this.chasingCount = 0;
+    }
+
+    public static WildAnimal get() {
+        WildAnimal animal = null;
         String[] types = {"wolf", "bear", "fox"};
-        name = types[Randoms.getRandomInt(types.length)];
+        String name = types[Rand.getInt(types.length)];
         switch (name) {
             case "wolf":
-                setWeight(Randoms.getRandomInt(20, 40));
-                setSpeed(Randoms.getRandomInt(15, 25));
-                strength = Randoms.getRandomInt(50, 100);
+                animal = new WildAnimal(Rand.getInt(20, 40),
+                        Rand.getInt(15, 25),
+                        name,
+                        Rand.getInt(50, 100));
                 break;
             case "bear":
-                setWeight(Randoms.getRandomInt(200, 300));
-                setSpeed(Randoms.getRandomInt(20, 30));
-                strength = Randoms.getRandomInt(100, 200);
+                animal = new WildAnimal(Rand.getInt(200, 300),
+                        Rand.getInt(20, 30),
+                        name,
+                        Rand.getInt(100, 200));
                 break;
             case "fox":
-                setWeight(Randoms.getRandomInt(10, 20));
-                setSpeed(Randoms.getRandomInt(20, 30));
-                strength = Randoms.getRandomInt(20, 40);
+                animal = new WildAnimal(Rand.getInt(10, 20),
+                        Rand.getInt(20, 30),
+                        name,
+                        Rand.getInt(20, 40));
                 break;
         }
+        return animal;
     }
 
     public void attack(FarmAnimal animal) {
