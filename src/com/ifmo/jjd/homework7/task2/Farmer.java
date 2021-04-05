@@ -1,5 +1,8 @@
 package com.ifmo.jjd.homework7.task2;
 
+import com.ifmo.jjd.homework7.task2.animal.FarmAnimal;
+import com.ifmo.jjd.homework7.task2.animal.WildAnimal;
+
 public class Farmer {
     private int resource;
 
@@ -21,7 +24,7 @@ public class Farmer {
     }
 
     public boolean collectResource(FarmAnimal animal) {
-        if (animal.getResource() <= 0) {
+        if (!animal.isOnFarm() || animal.getResource() == 0) {
             // Животное не может давать ресурс
             return false;
         }
@@ -47,9 +50,9 @@ public class Farmer {
     }
 
     public void feedAnimal(FarmAnimal animal) {
-        if (animal.eat()) {
-            System.out.println("Фермер покормил " + animal);
-        }
+        if (!animal.isOnFarm()) return;
+        animal.eat();
+        System.out.println("Фермер покормил " + animal);
     }
 
     @Override

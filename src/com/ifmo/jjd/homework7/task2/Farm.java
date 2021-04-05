@@ -1,5 +1,7 @@
 package com.ifmo.jjd.homework7.task2;
 
+import com.ifmo.jjd.homework7.task2.animal.FarmAnimal;
+import com.ifmo.jjd.homework7.task2.animal.WildAnimal;
 import com.ifmo.jjd.homework7.task2.util.Rand;
 
 import java.util.Arrays;

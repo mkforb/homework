@@ -1,4 +1,4 @@
-package com.ifmo.jjd.homework7.task2;
+package com.ifmo.jjd.homework7.task2.animal;
 
 abstract public class Animal {
     private final int weight;

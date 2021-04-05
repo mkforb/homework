@@ -1,13 +1,13 @@
-package com.ifmo.jjd.homework7.task2;
+package com.ifmo.jjd.homework7.task2.animal;
 
 import com.ifmo.jjd.homework7.task2.util.Rand;
 
-public class WildAnimal extends Animal {
+abstract public class WildAnimal extends Animal {
     private final String name;
     private final int strength;
     private int chasingCount;
 
-    private WildAnimal(int weight, int speed, String name, int strength) {
+    public WildAnimal(int weight, int speed, String name, int strength) {
         super(weight, speed);
         this.name = name;
         this.strength = strength;
@@ -17,25 +17,16 @@ public class WildAnimal extends Animal {
     public static WildAnimal get() {
         WildAnimal animal = null;
         String[] types = {"wolf", "bear", "fox"};
-        String name = types[Rand.getInt(types.length)];
-        switch (name) {
+        String type = types[Rand.getInt(types.length)];
+        switch (type) {
             case "wolf":
-                animal = new WildAnimal(Rand.getInt(20, 40),
-                        Rand.getInt(15, 25),
-                        name,
-                        Rand.getInt(50, 100));
+                animal = new Wolf();
                 break;
             case "bear":
-                animal = new WildAnimal(Rand.getInt(200, 300),
-                        Rand.getInt(20, 30),
-                        name,
-                        Rand.getInt(100, 200));
+                animal = new Bear();
                 break;
             case "fox":
-                animal = new WildAnimal(Rand.getInt(10, 20),
-                        Rand.getInt(20, 30),
-                        name,
-                        Rand.getInt(20, 40));
+                animal = new Fox();
                 break;
         }
         return animal;
@@ -50,6 +41,7 @@ public class WildAnimal extends Animal {
             return;
         }
         animal.minusHealth(strength);
+        if (animal.getHealth() == 0) animal.setOnFarm(false);
         System.out.println(animal);
     }
 
