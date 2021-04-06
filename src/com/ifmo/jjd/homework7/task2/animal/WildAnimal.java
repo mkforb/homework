@@ -2,7 +2,10 @@ package com.ifmo.jjd.homework7.task2.animal;
 
 import com.ifmo.jjd.homework7.task2.util.Rand;
 
-abstract public class WildAnimal extends Animal {
+import static com.ifmo.jjd.homework7.task2.Settings.*;
+import static com.ifmo.jjd.homework7.task2.Settings.WOLF_STRENGTH_TO;
+
+public class WildAnimal extends Animal {
     private final String name;
     private final int strength;
     private int chasingCount;
@@ -20,13 +23,22 @@ abstract public class WildAnimal extends Animal {
         String type = types[Rand.getInt(types.length)];
         switch (type) {
             case "wolf":
-                animal = new Wolf();
+                animal = new WildAnimal(Rand.getInt(WOLF_WEIGHT_FROM, WOLF_WEIGHT_TO),
+                        Rand.getInt(WOLF_SPEED_FROM, WOLF_SPEED_TO),
+                        "wolf",
+                        Rand.getInt(WOLF_STRENGTH_FROM, WOLF_STRENGTH_TO));
                 break;
             case "bear":
-                animal = new Bear();
+                animal = new WildAnimal(Rand.getInt(BEAR_WEIGHT_FROM, BEAR_WEIGHT_TO),
+                        Rand.getInt(BEAR_SPEED_FROM, BEAR_SPEED_TO),
+                        "bear",
+                        Rand.getInt(BEAR_STRENGTH_FROM, BEAR_STRENGTH_TO));
                 break;
             case "fox":
-                animal = new Fox();
+                animal = new WildAnimal(Rand.getInt(FOX_WEIGHT_FROM, FOX_WEIGHT_TO),
+                        Rand.getInt(FOX_SPEED_FROM, FOX_SPEED_TO),
+                        "fox",
+                        Rand.getInt(FOX_STRENGTH_FROM, FOX_STRENGTH_TO));
                 break;
         }
         return animal;

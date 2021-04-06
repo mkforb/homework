@@ -2,7 +2,9 @@ package com.ifmo.jjd.homework7.task2.animal;
 
 import com.ifmo.jjd.homework7.task2.util.Rand;
 
-abstract public class FarmAnimal extends Animal {
+import static com.ifmo.jjd.homework7.task2.Settings.*;
+
+public class FarmAnimal extends Animal {
     private final String type;
     private int health;
     private final int maxHealth;
@@ -26,16 +28,40 @@ abstract public class FarmAnimal extends Animal {
         String type = types[Rand.getInt(types.length)];
         switch (type) {
             case "cow":
-                animal = new Cow();
+                animal = new FarmAnimal(Rand.getInt(COW_WEIGHT_FROM, COW_WEIGHT_TO),
+                        Rand.getInt(COW_SPEED_FROM, COW_SPEED_TO),
+                        "cow",
+                        Rand.getInt(COW_HEALTH_FROM, COW_HEALTH_TO),
+                        true,
+                        Rand.getInt(COW_RESOURCE_FROM, COW_RESOURCE_TO),
+                        true);
                 break;
             case "cat":
-                animal = new Cat();
+                animal = new FarmAnimal(Rand.getInt(CAT_WEIGHT_FROM, CAT_WEIGHT_TO),
+                        Rand.getInt(CAT_SPEED_FROM, CAT_SPEED_TO),
+                        "cat",
+                        Rand.getInt(CAT_HEALTH_FROM, CAT_HEALTH_TO),
+                        false,
+                        0,
+                        true);
                 break;
             case "chicken":
-                animal = new Chicken();
+                animal = new FarmAnimal(Rand.getInt(CHICKEN_WEIGHT_FROM, CHICKEN_WEIGHT_TO),
+                        Rand.getInt(CHICKEN_SPEED_FROM, CHICKEN_SPEED_TO),
+                        "chicken",
+                        Rand.getInt(CHICKEN_HEALTH_FROM, CHICKEN_HEALTH_TO),
+                        true,
+                        Rand.getInt(CHICKEN_RESOURCE_FROM, CHICKEN_RESOURCE_TO),
+                        true);
                 break;
             case "rabbit":
-                animal = new Rabbit();
+                animal = new FarmAnimal(Rand.getInt(RABBIT_WEIGHT_FROM, RABBIT_WEIGHT_TO),
+                        Rand.getInt(RABBIT_SPEED_FROM, RABBIT_SPEED_TO),
+                        "rabbit",
+                        Rand.getInt(RABBIT_HEALTH_FROM, RABBIT_HEALTH_TO),
+                        true,
+                        0,
+                        true);
                 break;
         }
         return animal;

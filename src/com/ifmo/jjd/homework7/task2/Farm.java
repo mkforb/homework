@@ -11,8 +11,8 @@ public class Farm {
     private final FarmAnimal[] farmAnimals;
     private final WildAnimal[] wildAnimals;
 
-    public Farm() {
-        farmer = new Farmer();
+    public Farm(Farmer farmer) {
+        this.farmer = farmer;
         farmAnimals = new FarmAnimal[Settings.FARM_ANIMALS_COUNT];
         for (int i = 0; i < farmAnimals.length; i++) {
             farmAnimals[i] = FarmAnimal.get();
