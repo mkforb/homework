@@ -13,11 +13,12 @@ public class Farm {
 
     public Farm(Farmer farmer) {
         this.farmer = farmer;
+        // Массив с домашними животными
         farmAnimals = new FarmAnimal[Settings.FARM_ANIMALS_COUNT];
         for (int i = 0; i < farmAnimals.length; i++) {
             farmAnimals[i] = FarmAnimal.get();
         }
-        // ToDo: Как формируется массив с дикими животными?
+        // Массив с дикими животными
         wildAnimals = new WildAnimal[Rand.getInt(15, 20)];
         for (int i = 0; i < wildAnimals.length; i++) {
             wildAnimals[i] = WildAnimal.get();

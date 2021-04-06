@@ -3,7 +3,6 @@ package com.ifmo.jjd.homework7.task2.animal;
 import com.ifmo.jjd.homework7.task2.util.Rand;
 
 import static com.ifmo.jjd.homework7.task2.Settings.*;
-import static com.ifmo.jjd.homework7.task2.Settings.WOLF_STRENGTH_TO;
 
 public class WildAnimal extends Animal {
     private final String name;
