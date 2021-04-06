@@ -2,20 +2,28 @@ package com.ifmo.jjd.fitness;
 
 import java.time.LocalDate;
 
-public class Subscription {
+public class Membership {
     private final LocalDate regDate;
     private final LocalDate endDate;
     private final Visitor visitor;
-    private final SubscriptionType type;
+    private final Type type;
 
-    public Subscription(LocalDate endDate, Visitor visitor, SubscriptionType type) {
+    public Membership(LocalDate endDate, Visitor visitor, Type type) {
         this.regDate = LocalDate.now();
         this.endDate = endDate;
         this.visitor = visitor;
         this.type = type;
     }
 
-    public SubscriptionType getType() {
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public Visitor getVisitor() {
+        return visitor;
+    }
+
+    public Type getType() {
         return type;
     }
 }
