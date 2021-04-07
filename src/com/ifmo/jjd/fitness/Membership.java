@@ -23,6 +23,10 @@ public class Membership {
         this.type = type;
     }
 
+    public LocalDate getRegDate() {
+        return regDate;
+    }
+
     public LocalDate getEndDate() {
         return endDate;
     }

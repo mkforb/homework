@@ -9,6 +9,8 @@ public class Fitness {
     private final Membership[][] members = new Membership[Zone.values().length][Settings.ZONE_CAPACITY]; // 0 - POOL, 1 - GYM, 2 - GROUP
 
     private boolean add(Membership membership, Zone zone) {
+        Objects.requireNonNull(membership, "membership не может быть null");
+        Objects.requireNonNull(zone, "zone не может быть null");
         for (int i = 0; i < members[zone.getCode()].length; i++) {
             if (members[zone.getCode()][i] == null) {
                 members[zone.getCode()][i] = membership;
@@ -19,8 +21,16 @@ public class Fitness {
     }
 
     public boolean visitorArrive(Membership membership, Zone zone) {
+        Objects.requireNonNull(membership, "membership не может быть null");
+        Objects.requireNonNull(zone, "zone не может быть null");
+        // Фиксируем дату и время
+        LocalDateTime dtCurrent = LocalDateTime.now();
         // Проверить дату
-        if (membership.getEndDate().isBefore(LocalDate.now())) {
+        if (membership.getRegDate().isAfter(dtCurrent.toLocalDate())) {
+            System.out.println("Абонемент еще не действует");
+            return false;
+        }
+        if (membership.getEndDate().isBefore(dtCurrent.toLocalDate())) {
             System.out.println("Абонемент просрочен");
             return false;
         }
@@ -39,22 +49,25 @@ public class Fitness {
             System.out.println("Абонемент не подходит по времени");
             return false;
         }
+        // Впустить "абонемент"
         if (!add(membership, zone)) {
             System.out.println("Нет мест в " + zone);
             return false;
         }
-        System.out.println(membership.getVisitor() + " зашел в " + zone + " " + LocalDateTime.now().format(Settings.DTF));
+        System.out.println(membership.getVisitor() + " зашел в " + zone + " " + dtCurrent.format(Settings.DTF));
         return true;
     }
 
     public void visitorLeave(Membership membership) {
         Objects.requireNonNull(membership, "membership не может быть null");
+        // Фиксируем дату и время
+        LocalDateTime dtCurrent = LocalDateTime.now();
+        // Найти и выпустить "абонемент"
         for (int i = 0; i < members.length; i++) {
             for (int j = 0; j < members[i].length; j++) {
                 if (members[i][j] == membership) {
                     members[i][j] = null;
-                    System.out.println(membership.getVisitor().getFirstname() + " " + membership.getVisitor().getLastname() +
-                            " вышел" + " " + LocalDateTime.now().format(Settings.DTF));
+                    System.out.println(membership.getVisitor() + " вышел " + dtCurrent.format(Settings.DTF));
                     return;
                 }
             }

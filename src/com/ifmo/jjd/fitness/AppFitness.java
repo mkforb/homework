@@ -14,7 +14,8 @@ public class AppFitness {
             fitness.visitorArrive(mem1, Zone.GYM);
         }*/
         fitness.printVisitors();
-        //fitness.visitorLeave(sub1);
+        fitness.visitorLeave(member1);
+        fitness.printVisitors();
         fitness.close();
     }
 }
