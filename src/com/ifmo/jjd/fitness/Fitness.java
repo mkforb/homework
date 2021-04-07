@@ -65,7 +65,8 @@ public class Fitness {
         // Найти и выпустить "абонемент"
         for (int i = 0; i < members.length; i++) {
             for (int j = 0; j < members[i].length; j++) {
-                if (members[i][j] == membership) {
+                if (members[i][j] == null) continue;
+                if (members[i][j].equals(membership)) {
                     members[i][j] = null;
                     System.out.println(membership.getVisitor() + " вышел " + dtCurrent.format(Settings.DTF));
                     return;
@@ -80,7 +81,8 @@ public class Fitness {
         Objects.requireNonNull(membership, "membership не может быть null");
         for (Membership[] arr1 : members) {
             for (Membership elem1 : arr1) {
-                if (elem1 == membership) return true;
+                if (elem1 == null) continue;
+                if (elem1.equals(membership)) return true;
             }
         }
         return false;
@@ -98,12 +100,16 @@ public class Fitness {
     }
 
     public void printVisitors() {
-        for (int i = 0; i < members.length; i++) {
-            System.out.println("Посетители " + Zone.values()[i] + ":");
-            for (int j = 0; j < members[i].length; j++) {
-                if (members[i][j] == null) continue;
-                System.out.println("- " + members[i][j].getVisitor());
-            }
+        printVisitors(1);
+        printVisitors(0);
+        printVisitors(2);
+    }
+
+    private void printVisitors(int index) {
+        System.out.println("Посетители " + Zone.values()[index] + ":");
+        for (int j = 0; j < members[index].length; j++) {
+            if (members[index][j] == null) continue;
+            System.out.println("- " + members[index][j].getVisitor());
         }
     }
 }

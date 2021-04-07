@@ -31,6 +31,19 @@ public class Visitor {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Visitor)) return false;
+        Visitor visitor = (Visitor) o;
+        return birthYear == visitor.birthYear && firstname.equals(visitor.firstname) && lastname.equals(visitor.lastname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstname, lastname, birthYear);
+    }
+
+    @Override
     public String toString() {
         return firstname + " " + lastname + " (" + birthYear + ")";
     }

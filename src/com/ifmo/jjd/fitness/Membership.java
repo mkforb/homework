@@ -38,4 +38,17 @@ public class Membership {
     public Type getType() {
         return type;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Membership)) return false;
+        Membership that = (Membership) o;
+        return regDate.equals(that.regDate) && endDate.equals(that.endDate) && visitor.equals(that.visitor) && type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(regDate, endDate, visitor, type);
+    }
 }
