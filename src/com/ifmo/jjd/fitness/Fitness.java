@@ -1,6 +1,5 @@
 package com.ifmo.jjd.fitness;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
