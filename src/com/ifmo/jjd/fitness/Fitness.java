@@ -1,6 +1,7 @@
 package com.ifmo.jjd.fitness;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -42,7 +43,7 @@ public class Fitness {
             System.out.println("Нет мест в " + zone);
             return false;
         }
-        System.out.println(membership.getVisitor() + " зашел в " + zone + " в " + LocalTime.now().format(Settings.timeFormatter));
+        System.out.println(membership.getVisitor() + " зашел в " + zone + " " + LocalDateTime.now().format(Settings.DTF));
         return true;
     }
 
@@ -53,7 +54,7 @@ public class Fitness {
                 if (members[i][j] == membership) {
                     members[i][j] = null;
                     System.out.println(membership.getVisitor().getFirstname() + " " + membership.getVisitor().getLastname() +
-                            " вышел" + " в " + LocalTime.now().format(Settings.timeFormatter));
+                            " вышел" + " " + LocalDateTime.now().format(Settings.DTF));
                     return;
                 }
             }
