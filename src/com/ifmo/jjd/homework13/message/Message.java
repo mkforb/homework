@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Message {
     private int code;
-    private  MessagePriority priority;
+    private MessagePriority priority;
 
     public Message(int code, MessagePriority priority) {
         this.code = code;
