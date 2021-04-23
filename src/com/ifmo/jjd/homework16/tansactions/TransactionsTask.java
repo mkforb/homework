@@ -1,5 +1,6 @@
 package com.ifmo.jjd.homework16.tansactions;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,14 +21,25 @@ public class TransactionsTask {
         Transaction transaction7 = new Transaction("c38209a7-dbb7-47ee-b162-1953e29eab94", 3400, account3);
 
         // дано:
-        Stream<Transaction> transactionStream = Stream.of(transaction1, transaction2, transaction3,
+        List<Transaction> list = List.of(transaction1, transaction2, transaction3,
                 transaction4, transaction5, transaction6, transaction7);
 
         // TODO:: 1. собрать Map<String, Long>,
         //  где String - номер (number) аккаунта, Long - сумма транзакций (sum) по аккаунту
-        Map<String, Long> map = transactionStream
+        Map<String, Long> map = list.stream()
                 .collect(Collectors.groupingBy(transaction -> transaction.getAccount().getNumber(), Collectors.summingLong(Transaction::getSum)));
         System.out.println(map);
+        // Вариант 2
+        map = list.stream()
+                .collect(Collectors.toMap(
+                        transaction -> transaction.getAccount().getNumber(),
+                        transaction -> transaction.getSum(),
+                        (item1, item2) -> item1 + item2
+                ));
+        System.out.println(map);
         // TODO: 2. найти сумму транзакций по каждому аккаунту
+        Map<Account, Long> map2 = list.stream()
+                .collect(Collectors.groupingBy(Transaction::getAccount, Collectors.summingLong(Transaction::getSum)));
+        System.out.println(map2);
     }
 }

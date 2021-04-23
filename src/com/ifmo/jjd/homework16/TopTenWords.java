@@ -1,6 +1,12 @@
 package com.ifmo.jjd.homework16;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Locale;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 public class TopTenWords {
@@ -17,6 +23,20 @@ public class TopTenWords {
                 "uncover many web sites still uncover in their infancy Various versions uncover have evolved over the years uncover sometimes by accident" +
                 " sometimes on purpose injected humour and the like";
 
+        Map<String, Long> map = Arrays.stream(text.toLowerCase().split(" "))
+                .collect(Collectors.groupingBy(
+                        Function.identity(), // либо word -> word
+                        Collectors.counting()
+                ))
+                .entrySet()
+                .stream()
+                .sorted((o1, o2) -> o2.getValue().compareTo(o1.getValue()))
+                .limit(10)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
+                ));
 
+        System.out.println(map);
     }
 }
