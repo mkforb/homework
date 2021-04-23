@@ -11,5 +11,17 @@ public class Transaction {
         this.account = account;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public long getSum() {
+        return sum;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
     // TODO: добавить геттеры и сеттеры
 }
