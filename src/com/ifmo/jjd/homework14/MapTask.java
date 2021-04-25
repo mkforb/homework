@@ -16,7 +16,7 @@ public class MapTask {
 
         String city = "Тверь";
 
-
+        System.out.println(getLogins(firstTaskMap, city));
 
         // TODO:: дан список слов (например, words).
         //  Написать статический метод, который будет возвращать количество одинаковых слов с списке
@@ -67,6 +67,14 @@ public class MapTask {
                 "uncover many web sites still uncover in their infancy Various versions uncover have evolved over the years uncover sometimes by accident" +
                 " sometimes on purpose injected humour and the like";
 
+    }
+
+    private static List<String> getLogins(Map<String, String> map, String city) {
+        List<String> list = new ArrayList<>();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (entry.getValue().equals(city)) list.add(entry.getKey());
+        }
+        return list;
     }
 
 }
