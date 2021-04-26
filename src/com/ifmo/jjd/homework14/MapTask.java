@@ -33,7 +33,7 @@ public class MapTask {
         words.add("august");
         words.add("august");
 
-
+        System.out.println(wordFrequency(words));
 
         // TODO:: дана мапа (например, customerMap).
         //  Написать статический метод, который принимает на вход аргументы int from и int to и возвращает
@@ -45,7 +45,7 @@ public class MapTask {
         customerMap.put("3", new Customer("Максим", "3", 48));
         customerMap.put("4", new Customer("Евгения", "4", 67));
 
-
+        System.out.println(customersByAge(customerMap, 23, 50));
 
         // TODO:: Задания по тексту (text). На каждый пункт - минимум один метод:
         //  1. написать метод, принимающий на вход слово и возвращающий частоту
@@ -67,6 +67,12 @@ public class MapTask {
                 "uncover many web sites still uncover in their infancy Various versions uncover have evolved over the years uncover sometimes by accident" +
                 " sometimes on purpose injected humour and the like";
 
+        // 1
+        System.out.println(text1(text, "uncover"));
+        // 2
+        System.out.println(text2(text));
+        // 3
+        text3(text);
     }
 
     private static List<String> getLogins(Map<String, String> map, String city) {
@@ -75,6 +81,67 @@ public class MapTask {
             if (entry.getValue().equals(city)) list.add(entry.getKey());
         }
         return list;
+    }
+
+    private static Map<String, Integer> wordFrequency(List<String> list) {
+        Map<String, Integer> map = new HashMap<>();
+        for (String s : list) {
+            int i = map.getOrDefault(s, 0) + 1;
+            map.put(s, i);
+        }
+        return map;
+    }
+
+    private static Map<String, Customer> customersByAge(Map<String, Customer> map, int from, int to) {
+        Map<String, Customer> map1 = new HashMap<>();
+        for (Map.Entry<String, Customer> mapEntry : map.entrySet()) {
+            if (mapEntry.getValue().getAge() >= from && mapEntry.getValue().getAge() <= to) {
+                map1.put(mapEntry.getKey(), mapEntry.getValue());
+            }
+        }
+        return map1;
+    }
+
+    private static int text1(String text, String word) {
+        int freq = 0;
+        String[] words = text.toLowerCase().split(" ");
+        for (String s : words) {
+            if (s.equals(word)) freq++;
+        }
+        return freq;
+    }
+
+    private static Map<Integer, List<String>> text2(String text) {
+        Map<Integer, List<String>> map = new HashMap<>();
+        String[] words = text.toLowerCase().split(" ");
+        for (String s : words) {
+            List<String> list = map.getOrDefault(s.length(), new ArrayList<>());
+            if (!list.contains(s)) list.add(s);
+            map.put(s.length(), list);
+        }
+        return map;
+    }
+
+    private static void text3(String text) {
+        String[] words = text.toLowerCase().split(" ");
+        Map<String, Integer> map = wordFrequency(Arrays.asList(words));
+        System.out.println(map);
+        Set<Map.Entry<String, Integer>> entries = map.entrySet();
+        TreeSet<Map.Entry<String, Integer>> treeSet = new TreeSet<>(new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                int i = Integer.compare(o2.getValue(), o1.getValue());
+                if (i != 0) return i;
+                return o1.getKey().compareTo(o2.getKey());
+            }
+        });
+        treeSet.addAll(entries);
+        int i = 0;
+        for (Map.Entry<String, Integer> entry : treeSet) {
+            System.out.println(entry.getKey() + " - " + entry.getValue());
+            i++;
+            if (i == 10) return;
+        }
     }
 
 }

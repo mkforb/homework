@@ -35,5 +35,14 @@ public class Customer {
         this.age = age;
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "name='" + name + '\'' +
+                ", uuid='" + uuid + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
     // TODO: переопределить все необходимые методы
 }
