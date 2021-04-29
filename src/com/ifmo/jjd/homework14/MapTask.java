@@ -73,6 +73,7 @@ public class MapTask {
         System.out.println(text2(text));
         // 3
         text3(text);
+        // 4
     }
 
     private static List<String> getLogins(Map<String, String> map, String city) {
