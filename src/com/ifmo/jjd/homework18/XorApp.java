@@ -10,7 +10,7 @@ public class XorApp {
         File file = new File("lesson18.txt");
         String text = "dlfkk dflk sdlfk ldfgf";
         System.out.println("Исходная строка: " + text);
-        byte key = 35;
+        String key = "Super strong key 33";
 
         // Шифрование
         try (FileOutputStream fileOutput = new FileOutputStream(file);
