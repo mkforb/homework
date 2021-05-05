@@ -1,7 +1,12 @@
 package com.ifmo.jjd.homework19;
 
+import javax.imageio.ImageIO;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.awt.image.BufferedImage;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
@@ -28,7 +33,12 @@ public class Client {
             System.out.println("Введите сообщение");
             text = scanner.nextLine();
             if (text.equals("/exit")) break;
-            sendAndPrintMessage(SimpleMessage.getMessage(userName, text));
+            if (text.toLowerCase().startsWith("/send-image")) {
+                String[] params = text.toLowerCase().split(" ");
+                sendImage(params[1]);
+            } else {
+                sendAndPrintMessage(SimpleMessage.getMessage(userName, text));
+            }
         }
     }
 
@@ -49,6 +59,21 @@ public class Client {
             System.out.println("Ошибка чтения сообщения");
         } catch (Exception e) {
             System.out.println("Ошибка соединения");
+        }
+    }
+
+    private void sendImage(String fileName) {
+        try (Connection connection = new Connection(new Socket(ip, port))) {
+            BufferedImage bufferedImage = ImageIO.read(new File(fileName));
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", stream);
+            connection.sendImage(stream.toByteArray());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

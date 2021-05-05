@@ -3,6 +3,7 @@ package com.ifmo.jjd.homework19;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.awt.image.BufferedImage;
 import java.net.Socket;
 
 /**
@@ -27,6 +28,15 @@ public class Connection implements AutoCloseable {
 
     public SimpleMessage readMessage() throws IOException, ClassNotFoundException {
         return (SimpleMessage) input.readObject();
+    }
+
+    public void sendImage(byte[] bytes) throws IOException {
+        output.writeObject(bytes);
+        output.flush();
+    }
+
+    public byte[] readImage() throws IOException, ClassNotFoundException {
+        return (byte[]) input.readObject();
     }
 
     @Override
