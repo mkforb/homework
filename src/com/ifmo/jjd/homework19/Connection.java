@@ -30,15 +30,6 @@ public class Connection implements AutoCloseable {
         return (SimpleMessage) input.readObject();
     }
 
-    public void sendImage(byte[] bytes) throws IOException {
-        output.writeObject(bytes);
-        output.flush();
-    }
-
-    public byte[] readImage() throws IOException, ClassNotFoundException {
-        return (byte[]) input.readObject();
-    }
-
     @Override
     public void close() throws Exception {
         input.close();
