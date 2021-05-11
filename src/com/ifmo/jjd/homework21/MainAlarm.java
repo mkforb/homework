@@ -3,13 +3,13 @@ package com.ifmo.jjd.homework21;
 /**
  * Created by User on 11.05.2021.
  */
-public class AbstractAlarm implements Alarm {
+public class MainAlarm implements Alarm {
     private final int tempFrom;
     private final int tempTo;
     private final String text;
     private boolean reached = false;
 
-    public AbstractAlarm(int tempFrom, int tempTo, String text) {
+    public MainAlarm(int tempFrom, int tempTo, String text) {
         this.tempFrom = tempFrom;
         this.tempTo = tempTo;
         this.text = text;
