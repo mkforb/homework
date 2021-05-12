@@ -1,8 +1,10 @@
-package com.ifmo.jjd.second.command;
+package com.ifmo.jjd.secondexam.command;
+
+import com.ifmo.jjd.secondexam.Settings;
 
 public class Save extends AbstractCommand {
     public Save() {
-        super("Save game");
+        super(Settings.MENU_SAVE);
     }
 
     @Override

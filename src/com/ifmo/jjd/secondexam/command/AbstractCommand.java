@@ -1,7 +1,7 @@
-package com.ifmo.jjd.second.command;
+package com.ifmo.jjd.secondexam.command;
 
 public abstract class AbstractCommand implements Command {
-    private String text;
+    private final String text;
 
     public AbstractCommand(String text) {
         this.text = text;

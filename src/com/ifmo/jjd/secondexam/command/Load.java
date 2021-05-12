@@ -1,8 +1,10 @@
-package com.ifmo.jjd.second.command;
+package com.ifmo.jjd.secondexam.command;
+
+import com.ifmo.jjd.secondexam.Settings;
 
 public class Load extends AbstractCommand {
     public Load() {
-        super("Load game");
+        super(Settings.MENU_LOAD);
     }
 
     @Override

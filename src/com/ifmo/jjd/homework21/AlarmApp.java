@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Created by User on 11.05.2021.
  */
-public class App {
+public class AlarmApp {
     public static void main(String[] args) {
         Sensor tempSensor = new Sensor();
         tempSensor.addListener(new MainAlarm(100, 299, "Green"));

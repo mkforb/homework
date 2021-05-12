@@ -1,4 +1,4 @@
-package com.ifmo.jjd.second.command;
+package com.ifmo.jjd.secondexam.command;
 
 public interface Command {
     String getText();
