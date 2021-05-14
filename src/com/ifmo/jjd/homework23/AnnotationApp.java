@@ -27,28 +27,29 @@ public class AnnotationApp {
         System.out.println(obj);
     }
 
-    private static Object createObject(Class<?> classObj) {
-        if (classObj.isAnnotationPresent(Component.class)) {
+    private static <T> T createObject(Class<?> cl) {
+        Object o = null;
+        if (cl.isAnnotationPresent(Component.class)) {
+            Component component = cl.getDeclaredAnnotation(Component.class);
+            String fileName = component.fileName();
+            // Прочитать параметры из файла properties
+            Properties properties = readProperties(fileName);
             try {
                 // Получить публичный конструктор без параметров
-                Constructor<?> constructor = classObj.getConstructor();
+                Constructor<?> constructor = cl.getDeclaredConstructor();
                 // Создать объект
-                Object obj = constructor.newInstance();
+                o = constructor.newInstance();
                 // Получить свойства класса
-                Field[] fields = classObj.getDeclaredFields();
-                // Прочитать параметры из файла properties
-                Properties properties = readProperties();
+                Field[] fields = cl.getDeclaredFields();
                 for (Field field : fields) {
                     if (field.isAnnotationPresent(Required.class)) {
                         // Получить метод сеттера для свойства
                         String methodName = "set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
-                        Method setMethod = classObj.getMethod(methodName, field.getType());
-                        // Получить значение свойства из файла и преобразовать его к нужному типу
-                        Object value = convert(properties.getProperty(classObj.getName() + "." + field.getName()), field.getType());
-                        setMethod.invoke(obj, value);
+                        Method setMethod = cl.getDeclaredMethod(methodName, field.getType());
+                        // Получить значение свойства из файла и преобразовать его
+                        setMethod.invoke(o, convert(properties.getProperty(field.getName()), field.getType())); // Гужно делать проверку на тип данных поля. В зависимости от типа делать преобразование. Это будет отдельный класс
                     }
                 }
-                return obj;
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
@@ -57,21 +58,23 @@ public class AnnotationApp {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
-        return null;
+        return (T) o;
     }
 
-    private static Properties readProperties() throws IOException {
-        InputStream input = AnnotationApp.class.getClassLoader().getResourceAsStream("params.properties");
+    private static Properties readProperties(String fileName) {
         Properties properties = new Properties();
-        properties.load(input);
+        try (InputStream input = AnnotationApp.class.getClassLoader().getResourceAsStream(fileName)) {
+            properties.load(input);
+        } catch (IOException e) {
+            // Выбросить новый runtime exception, что не удается прочитать файл с настройками
+            throw new RuntimeException("Файл не удалось прочитать");
+        }
         return properties;
     }
 
-    private static Object convert(String value, Class<?> type) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    private static Object convert(String value, Class<?> type) {
         if (type.isPrimitive()) {
             if (type.getName().equals("int")) {
                 return Integer.valueOf(value);
