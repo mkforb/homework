@@ -47,7 +47,7 @@ public class AnnotationApp {
                         String methodName = "set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
                         Method setMethod = cl.getDeclaredMethod(methodName, field.getType());
                         // Получить значение свойства из файла и преобразовать его, вызвать метод
-                        setMethod.invoke(o, convert(properties.getProperty(field.getName()), field.getType())); // Гужно делать проверку на тип данных поля. В зависимости от типа делать преобразование. Это будет отдельный класс
+                        setMethod.invoke(o, convert(properties.getProperty(field.getName()), field.getType())); // Нужно делать проверку на тип данных поля. В зависимости от типа делать преобразование. Это будет отдельный класс
                     }
                 }
             } catch (NoSuchMethodException e) {
@@ -82,6 +82,6 @@ public class AnnotationApp {
         } else if (type.getName().equals("java.lang.String")) {
             return value;
         }
-        return null;
+        return value;
     }
 }

@@ -10,6 +10,9 @@ public class Step {
     public Step(String description, String ...options) {
         this.description = description;
         this.options.addAll(Arrays.stream(options).collect(Collectors.toList()));
+        if (this.options.isEmpty()) {
+            this.options.add(Settings.START_AGAIN + Settings.OPTION_SEP + Settings.STEP_1);
+        }
         this.options.add(Settings.MENU_EXIT);
     }
 
