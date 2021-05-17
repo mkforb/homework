@@ -12,13 +12,8 @@ public class Menu {
         commands.add(command);
     }
 
-    public void execute(int num) {
-        if (num < 0 || num > commands.size() - 1) {
-            System.out.println("Неверная команда");
-            return;
-        }
-        Command command = commands.get(num);
-        command.execute();
+    public Command getCommand(int num) {
+        return commands.get(num - 1);
     }
 
     public void print() {

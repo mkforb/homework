@@ -47,8 +47,18 @@ public class Game {
             }
             menu.addCommand(commandExit);
             menu.print();
-            int num = scanner.nextInt();
-            menu.execute(num - 1);
+            while (true) {
+                try {
+                    int num = Integer.parseInt(scanner.nextLine());
+                    Command command = menu.getCommand(num);
+                    if (command != null) {
+                        command.execute();
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Введите корректное значение");
+                }
+            }
         }
     }
 
@@ -65,19 +75,27 @@ public class Game {
                 System.out.println("Не найден шаг: " + stepName);
                 break;
             }
+            gameStarted = !step.isFinish();
             System.out.println(step.getDescription());
             List<String> options = step.getOptions();
             if (options.isEmpty()) break;
             printOptions(options);
-            int num = scanner.nextInt();
-            if (num < 1 || num > step.getOptions().size()) {
-                System.out.println("Неверная команда");
-            } else {
-                String[] str = step.getOptions().get(num - 1).split(Settings.OPTION_SEP);
-                stepName = str.length == 2 ? str[1] : str[0];
-                if (stepName.equals(Settings.MENU_EXIT)) break;
-                stepNameToSave = stepName;
+            String option;
+            while (true) {
+                try {
+                    int num = Integer.parseInt(scanner.nextLine());
+                    option = step.getOptions().get(num - 1);
+                    if (option != null) {
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Введите корректное значение");
+                }
             }
+            String[] str = option.split(Settings.OPTION_SEP);
+            stepName = str.length == 2 ? str[1] : str[0];
+            if (stepName.equals(Settings.MENU_EXIT)) break;
+            stepNameToSave = stepName;
         }
     }
 
