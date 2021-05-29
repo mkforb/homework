@@ -1,4 +1,4 @@
-package com.ifmo.jjd.multithreading.homework26;
+package com.ifmo.jjd.multithreading.homework26.task2;
 
 import java.util.ArrayList;
 import java.util.HashMap;

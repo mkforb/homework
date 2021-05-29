@@ -1,4 +1,4 @@
-package com.ifmo.jjd.multithreading.homework26;
+package com.ifmo.jjd.multithreading.homework26.task1;
 
 import java.util.UUID;
 
