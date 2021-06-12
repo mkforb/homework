@@ -3,10 +3,8 @@ package com.ifmo.jjd.secondexam;
 import com.ifmo.jjd.secondexam.command.*;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Game {
     private final Command commandStart = new Start(this);
@@ -20,6 +18,30 @@ public class Game {
     private String stepNameToSave;
 
     public Game() {
+        TxtHandler txtHandler = new TxtHandler(new File(Settings.FILE_NAME_STEPS));
+        String[] fileStrings = new String(txtHandler.readFromFile()).split("\r\n");
+        String stepTitle = "";
+        String stepDescription = "";
+        List<String> stepOptions = new ArrayList<>();
+        for (String str : fileStrings) {
+            if (str.isEmpty()) continue;
+            if (str.startsWith("### ")) {
+                if (!stepTitle.isEmpty()) {
+                    actions.put(stepTitle, new Step(stepDescription, stepOptions.toArray(new String[0])));
+                    stepDescription = "";
+                    stepOptions.clear();
+                }
+                stepTitle = str.substring(4);
+            } else if (stepDescription.isEmpty()) {
+                stepDescription = str;
+            } else {
+                stepOptions.add(str);
+            }
+        }
+        if (!stepTitle.isEmpty()) {
+            actions.put(stepTitle, new Step(stepDescription, stepOptions.toArray(new String[0])));
+        }
+        /*System.out.println(actions);
         actions.put("Лисенок", new Step("Каждое утро Лисёнок просыпался, завтракал и шёл увидеться с Бельчонком. Это утро не было исключением. Лисёнок пришёл на их обычное место встречи, но Бельчонка там не было. Лисёнок ждал, ждал, но так и не смог дождаться своего друга. \" Бельчонок не пропустил еще ни одной встречи, вдруг он попал в беду.\" - подумал Лисёнок. Как поступить Лисенку?", "Вернуться домой", "Отправиться на поиски"));
         actions.put("Вернуться домой", new Step("Вернувшись домой, Лисёнок нашёл там Бельчонка. Оказалось, что Бельчонок пришёл на место встречи раньше и увидел там рой злобных пчел. Он поспешил предупредить об этом Лисёнка, но они разминулись. Наконец-то друзья нашли друг друга! Игра завершилась успехом"));
         actions.put("Отправиться на поиски", new Step("Все лесные жители были заняты своими делами и не обращали внимания на Лисёнка и его проблему. Но вдруг кто нибудь видел Бельчонка... Лисёнок не знал, что ему делать. Помогите ему.", "Попытаться разузнать о Бельчонке у лесных жителей", "Искать Бельчонка в одиночку"));
@@ -32,7 +54,7 @@ public class Game {
         actions.put("Подождать, вдруг пчёлы улетят", new Step("Лисёнок подождал немного, и пчёлы разлетелись. Лисёнок без проблем набрал мёда. Вдруг он понял, что очень голоден. Что же делать?", "Поесть немного и передохнуть", "Скорее отнести мёд Медвежонку"));
         actions.put("Нужно попытаться выкрасть мёд немедленно", new Step("Это была не лучшая идея. Пчёлы покусали Лисёнка, теперь ему самому нужна помощь. Игра завершилась неудачей"));
         actions.put("Поесть немного и передохнуть", new Step("Пока Лисёнок ел, злобные пчёлы вернулись и покусали его. Лисёнку нужна помощь, он не сможет продолжить поиски. Игра завершилась неудачей"));
-        actions.put("Скорее отнести мёд Медвежонку", new Step("Довольный Медвежонок рассказал Лисёнку, что очень хорошо знает семью Белок и уверен, что Бельчонок никогда не пошёл бы в глубь леса. Он заверял Лисёнка, что Белки не попадают в неприятности, и что Совам нельзя верить, он также уговаривал Лисёнка вернуться домой.", "Медвежонок ничего не знает, нужно продолжить поиски -> Искать Бельчонка в одиночку", "Может быть он прав и Лисёнок просто паникует -> Вернуться домой"));
+        actions.put("Скорее отнести мёд Медвежонку", new Step("Довольный Медвежонок рассказал Лисёнку, что очень хорошо знает семью Белок и уверен, что Бельчонок никогда не пошёл бы в глубь леса. Он заверял Лисёнка, что Белки не попадают в неприятности, и что Совам нельзя верить, он также уговаривал Лисёнка вернуться домой.", "Медвежонок ничего не знает, нужно продолжить поиски -> Искать Бельчонка в одиночку", "Может быть он прав и Лисёнок просто паникует -> Вернуться домой"));*/
     }
 
     public void mainMenu() {
